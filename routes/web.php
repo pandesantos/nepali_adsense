@@ -19,11 +19,13 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::post('/signup',[
 		'uses'=> '\App\Http\Controllers\HomeController@postSubmit',
-		'as'=>'auth.proceed'
+		'as'=>'auth.proceed',
+		'middleware' => 'guest'
 		]);
 	Route::post('/signin',[
 		'uses'=> '\App\Http\Controllers\HomeController@postSubmit',
-		'as'=>'auth.proceed'
+		'as'=>'auth.proceed',
+		'middleware' => 'guest'
 		]);
 
 	Route::get('/view/a={app_id}/d={dev_id}',[
@@ -44,12 +46,14 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('/advertiser/newad',[
 		'uses'=>'\App\Http\Controllers\AdController@getAdvertiser',
-		'as'=> 'ad.advertise'
+		'as'=> 'ad.advertise',
+		'middleware' => 'auth'
 		]);
 
 	Route::get('/developer/newapp',[
 		'uses'=>'\App\Http\Controllers\AppController@getNewApp',
-		'as'=> 'app.new'
+		'as'=> 'app.new',
+		'middleware' => 'auth'
 		]);
 
 });
